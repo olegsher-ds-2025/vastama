@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.vastama.com/sitemap.xml
+
+# Analytics placeholder: If you add analytics scripts, put them in your pages' <head>.
+# Example (do NOT put tracking IDs here): See the commented example in index.html
