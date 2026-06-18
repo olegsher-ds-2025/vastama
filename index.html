@@ -1,131 +1,376 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Vastama Ltd — UI Automation Testing, pytest frameworks</title>
-	<meta name="description" content="Vastama Ltd — design, deploy and maintain UI automation testing. We build pytest-based frameworks and customised regression tests for enterprises.">
-	<meta property="og:title" content="Vastama Ltd — UI Automation Testing">
-	<meta property="og:description" content="Design, deploy and maintain UI automation testing. pytest-based frameworks and customised regression suites.">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://www.vastama.com/">
-	<style>
-		:root{--accent:#0a74ff;--bg:#0f1720;--card:#0b1220;--muted:#98a0b3}
-		html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#e6eef8;background:linear-gradient(180deg,#061022 0%, #081428 100%)}
-		.wrap{max-width:1100px;margin:0 auto;padding:28px}
-		header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-		.brand{display:flex;gap:12px;align-items:center}
-		.logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#00d4ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042039}
-		h1{margin:0;font-size:clamp(22px,3.4vw,36px)}
-		p.lead{color:var(--muted);margin:12px 0 24px;max-width:66ch}
-		.hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
-		.card{background:rgba(255,255,255,0.02);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
-		.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
-		.service h3{margin:0 0 8px}
-		.cta{margin-top:18px}
-		.button{background:var(--accent);color:#042039;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:600}
-		footer{margin-top:36px;color:var(--muted);font-size:13px;text-align:center}
-		@media(min-width:880px){.hero{grid-template-columns:1fr 360px}}
-		.tech{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-		a.link{color:var(--accent);text-decoration:none}
-	</style>
-	<link rel="canonical" href="https://www.vastama.com/">
-	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-	<meta name="theme-color" content="#061022">
-	<!-- Analytics placeholder: paste your analytics script here (e.g. Google Analytics gtag.js) -->
-	<!-- Example:
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments)}
-		gtag('js', new Date());
-		gtag('config', 'G-XXXXXXXXXX');
-	</script>
-	-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vastama Ltd — Design, build, test, monitor for software teams</title>
+<meta name="description" content="Vastama Ltd runs the full web presence pipeline: design and build interfaces, automate testing, and monitor performance — for software teams who'd rather ship than firefight.">
+<meta property="og:title" content="Vastama Ltd — Design, build, test, monitor">
+<meta property="og:description" content="One pipeline for a web presence: design, build, automated testing, and ongoing monitoring — not four separate vendors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.vastama.com/">
+<link rel="canonical" href="https://www.vastama.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#15191C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15191C;
+    --surface:#1C2226;
+    --surface-2:#242B30;
+    --line:#333C42;
+    --line-soft:#2A3136;
+    --text:#E7E5DE;
+    --text-dim:#9CA3A8;
+    --text-faint:#6B7378;
+    --signal:#D9A441;
+    --signal-dim:#8A6B30;
+    --ok:#7FB069;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(21,25,28,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .logo{font-family:var(--mono);font-weight:600;font-size:16px;letter-spacing:0.02em;color:var(--text);}
+  .logo span{color:var(--signal);}
+  .nav-links{display:flex;gap:32px;font-size:14px;color:var(--text-dim);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    border:1px solid var(--line);border-radius:6px;padding:8px 16px;
+    font-size:13px;font-family:var(--mono);color:var(--text);
+  }
+  .nav-cta:hover{border-color:var(--signal-dim);background:var(--surface-2);}
+
+  /* ---- hero ---- */
+  .hero{padding:88px 0 64px;border-bottom:1px solid var(--line-soft);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;color:var(--signal);
+    text-transform:uppercase;letter-spacing:0.12em;margin-bottom:18px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(127,176,105,0.15);}
+  h1{
+    font-size:44px;line-height:1.12;font-weight:600;letter-spacing:-0.01em;
+    margin-bottom:20px;color:var(--text);
+  }
+  h1 em{font-style:normal;color:var(--signal);}
+  .hero p.lede{font-size:17px;color:var(--text-dim);max-width:480px;margin-bottom:32px;}
+  .hero-actions{display:flex;gap:14px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:7px;font-size:14px;font-weight:500;
+    font-family:var(--sans);
+  }
+  .btn-primary{background:var(--signal);color:#1A1505;}
+  .btn-primary:hover{background:#E5B355;}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-faint);background:var(--surface);}
+
+  /* terminal panel */
+  .terminal{
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;
+    font-family:var(--mono);font-size:13px;
+  }
+  .terminal-head{
+    display:flex;align-items:center;gap:8px;padding:11px 16px;
+    border-bottom:1px solid var(--line-soft);background:var(--surface-2);
+  }
+  .dot{width:9px;height:9px;border-radius:50%;}
+  .dot.r{background:#E2685A;} .dot.y{background:#E2B85A;} .dot.g{background:var(--ok);}
+  .terminal-title{margin-left:6px;color:var(--text-faint);font-size:12px;}
+  .terminal-body{padding:20px 18px;min-height:248px;}
+  .tline{display:flex;gap:10px;opacity:0;animation:reveal 0.4s forwards;align-items:baseline;margin-bottom:9px;}
+  .tline .status{flex-shrink:0;width:64px;font-weight:600;}
+  .tline .status.pass{color:var(--ok);}
+  .tline .status.run{color:var(--signal);}
+  .tline .status.info{color:var(--text-faint);}
+  .tline .target{color:var(--text-dim);}
+  .tline .ms{color:var(--text-faint);margin-left:auto;flex-shrink:0;}
+  .cursor{display:inline-block;width:7px;height:14px;background:var(--signal);animation:blink 1s step-end infinite;vertical-align:-2px;}
+  @keyframes reveal{to{opacity:1;}}
+  @keyframes blink{50%{opacity:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .tline{animation:none;opacity:1;} .cursor{animation:none;}
+  }
+
+  /* ---- trust strip ---- */
+  .strip{border-bottom:1px solid var(--line-soft);padding:22px 0;}
+  .strip .wrap{display:flex;gap:40px;align-items:center;font-family:var(--mono);font-size:12.5px;color:var(--text-faint);flex-wrap:wrap;}
+  .strip strong{color:var(--text-dim);font-weight:500;}
+
+  /* ---- services ---- */
+  .section{padding:80px 0;}
+  .section-head{max-width:560px;margin-bottom:48px;}
+  .section-label{font-family:var(--mono);font-size:12px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;}
+  h2{font-size:28px;font-weight:600;letter-spacing:-0.01em;margin-bottom:10px;}
+  .section-head p{color:var(--text-dim);font-size:15.5px;}
+
+  .pipeline{display:flex;align-items:stretch;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .pstage{
+    flex:1;min-width:0;padding:28px 22px;
+    display:flex;flex-direction:column;
+  }
+  .pstage:hover{background:var(--surface);}
+  .pstage-top{margin-bottom:14px;}
+  .module-id{font-family:var(--mono);font-size:11.5px;color:var(--signal);margin-bottom:6px;}
+  .pstage h3{font-size:18px;font-weight:600;}
+  .pstage p{color:var(--text-dim);font-size:13.5px;margin-bottom:14px;flex-grow:0;}
+  .pstage ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:auto;}
+  .pstage li{font-size:12.5px;color:var(--text-faint);display:flex;gap:8px;}
+  .pstage li::before{content:'›';color:var(--signal);font-weight:600;flex-shrink:0;}
+  .pconnector{
+    display:flex;align-items:center;justify-content:center;
+    width:32px;flex-shrink:0;background:var(--surface-2);
+    border-left:1px solid var(--line-soft);border-right:1px solid var(--line-soft);
+    color:var(--signal);font-size:16px;
+  }
+  @media (max-width:880px){
+    .pipeline{flex-direction:column;}
+    .pconnector{width:100%;height:28px;border-left:none;border-right:none;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);transform:rotate(90deg);}
+  }
+
+  /* ---- approach ---- */
+  .approach-list{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;}
+  .approach-item{background:var(--surface);padding:28px 24px;}
+  .approach-item .num{font-family:var(--mono);font-size:12px;color:var(--text-faint);margin-bottom:14px;}
+  .approach-item h4{font-size:15.5px;font-weight:600;margin-bottom:8px;}
+  .approach-item p{font-size:13.5px;color:var(--text-dim);}
+  @media (max-width:760px){.approach-list{grid-template-columns:1fr;}}
+
+  /* ---- contact ---- */
+  .contact{
+    border:1px solid var(--line);border-radius:10px;padding:48px;
+    display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+    background:var(--surface);
+  }
+  .contact h2{margin-bottom:8px;}
+  .contact p{color:var(--text-dim);font-size:15px;}
+  .contact-meta{font-family:var(--mono);font-size:13px;color:var(--text-faint);margin-top:14px;display:flex;flex-direction:column;gap:4px;}
+  .contact-meta a:hover{color:var(--signal);}
+  @media (max-width:680px){.contact{grid-template-columns:1fr;text-align:left;}}
+
+  footer{border-top:1px solid var(--line-soft);padding:28px 0;}
+  footer .wrap{display:flex;justify-content:space-between;font-size:12.5px;color:var(--text-faint);font-family:var(--mono);flex-wrap:wrap;gap:8px;}
+</style>
 </head>
 <body>
-	<div class="wrap">
-		<header>
-			<div class="brand">
-				<img src="images/me.jpeg" alt="Business photo of Vastama" style="width:64px;height:64px;border-radius:8px;object-fit:cover;box-shadow:0 4px 12px rgba(2,6,23,0.6)">
-				<div>
-					<div style="font-weight:700">Vastama Ltd</div>
-					<div style="font-size:13px;color:var(--muted)">UI Automation · pytest frameworks · Regression</div>
-				</div>
-			</div>
-			<nav style="font-size:14px;color:var(--muted)">
-				<a class="link" href="about.html">About</a> &nbsp;·&nbsp; <a class="link" href="#services">Services</a> &nbsp;·&nbsp; <a class="link" href="#process">Process</a> &nbsp;·&nbsp; <a class="link" href="#contact">Contact</a>
-			</nav>
-		</header>
 
-		<main class="hero">
-			<section>
-				<h1>Design, deploy and maintain reliable UI automation.</h1>
-				<p class="lead">Vastama helps engineering teams ship with confidence by building pytest-based automation frameworks and customised regression suites tailored to your product, stack and release cadence.</p>
+<nav>
+  <div class="wrap">
+    <div class="logo">vastama<span>.</span></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
 
-				<div class="card">
-					<strong>What we do</strong>
-					<div class="services" id="services">
-						<div class="service">
-							<h3>Framework design</h3>
-							<div class="muted">Architect resilient pytest fixtures, modular test patterns and CI integration.</div>
-						</div>
-						<div class="service">
-							<h3>Deploy & Integrate</h3>
-							<div class="muted">Integrate tests into pipelines, scale across runners and environments.</div>
-						</div>
-						<div class="service">
-							<h3>Maintenance & Support</h3>
-							<div class="muted">Keep suites stable: triage flakiness, update selectors, and maintain test health.</div>
-						</div>
-						<div class="service">
-							<h3>Custom Regression</h3>
-							<div class="muted">Build targeted regression suites that match your risk model and release needs.</div>
-						</div>
-					</div>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Available for new engagements</div>
+      <h1>Design, build, test, monitor — <em>one pipeline, not four vendors.</em></h1>
+      <p class="lede">Vastama runs the full lifecycle of a web presence: design and build it, automate the testing, then keep monitoring it after launch. Start at any stage, or hand over the whole cycle.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Start a conversation</a>
+        <a href="#services" class="btn btn-ghost">See what we do</a>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-head">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="terminal-title">vastama — suite run</div>
+      </div>
+      <div class="terminal-body" id="term"></div>
+    </div>
+  </div>
+</header>
 
-					<div class="cta">
-						<a class="button" href="#contact">Get a quote</a>
-					</div>
-				</div>
-			</section>
+<div class="strip">
+  <div class="wrap">
+    <span><strong>Based in</strong> Israel</span>
+    <span><strong>Engagements</strong> remote, contract & retainer</span>
+    <span><strong>Stack-agnostic</strong> Figma-to-frontend · Python · Playwright · CI/CD · AI-driven monitoring</span>
+  </div>
+</div>
 
-			<aside class="card">
-				<h3 id="process">Our process</h3>
-				<ol style="color:var(--muted);padding-left:18px">
-					<li>Audit — Review your app, tests and CI.</li>
-					<li>Design — Propose framework and test strategy.</li>
-					<li>Build — Implement pytest-based framework & tests.</li>
-					<li>Operate — Hand over with docs, or maintain on request.</li>
-				</ol>
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label">How we work</div>
+      <h2>One pipeline, start anywhere</h2>
+      <p>Design, build, test, and monitor a web presence as a continuous cycle — not four separate vendors who don't talk to each other. Come in at stage one or drop into an existing project at any stage.</p>
+    </div>
 
-				<h4 style="margin-top:16px">Technologies</h4>
-				<div class="tech">
-					<span>pytest</span>
-					<span>Playwright / Selenium</span>
-					<span>CI: GitHub Actions, GitLab CI</span>
-					<span>Docker</span>
-				</div>
+    <div class="pipeline">
+      <div class="pstage">
+        <div class="pstage-top">
+          <div class="module-id">01 · design</div>
+          <h3>Design</h3>
+        </div>
+        <p>Web and product interfaces — from wireframes to a full design system — built by a dedicated design team in the Vastama network.</p>
+        <ul>
+          <li>Marketing sites, dashboards, internal tools</li>
+          <li>Design systems and component libraries</li>
+        </ul>
+      </div>
+      <div class="pconnector" aria-hidden="true"><span>→</span></div>
 
-				<h4 style="margin-top:16px">Quick facts</h4>
-				<ul style="color:var(--muted);padding-left:18px">
-					<li>Custom frameworks — maintainable tests and clear ownership</li>
-					<li>Focus on low-flake, fast feedback loops</li>
-				</ul>
-			</aside>
-		</main>
+      <div class="pstage">
+        <div class="pstage-top">
+          <div class="module-id">02 · build</div>
+          <h3>Build</h3>
+        </div>
+        <p>Designs shipped as real, deployed frontend — not handed back as static mockups for someone else to implement.</p>
+        <ul>
+          <li>Production frontend builds and deployment</li>
+          <li>Integration with your existing stack and CI</li>
+        </ul>
+      </div>
+      <div class="pconnector" aria-hidden="true"><span>→</span></div>
 
-		<section style="margin-top:28px" class="card" id="contact">
-			<h3>Contact</h3>
-			<p style="color:var(--muted)">Tell us about your product and testing goals. We provide audits, proposals and fixed-price engagements.</p>
-			<p><a class="link" href="mailto:contact@vastama.com">contact@vastama.com</a></p>
-			<p style="color:var(--muted);font-size:13px;margin-top:8px">Or open an issue on our GitHub repository if you prefer collaboration-driven work.</p>
-		</section>
+      <div class="pstage">
+        <div class="pstage-top">
+          <div class="module-id">03 · test</div>
+          <h3>Test</h3>
+        </div>
+        <p>Automated regression suites that survive your codebase's next six months, wired into CI so the right things fail loudly.</p>
+        <ul>
+          <li>End-to-end and API test suites (Playwright, pytest)</li>
+          <li>Flaky test triage on existing suites</li>
+        </ul>
+      </div>
+      <div class="pconnector" aria-hidden="true"><span>→</span></div>
 
-		<footer>
-			<div>© Vastama Ltd — UI Automation & Testing Services</div>
-			<div style="margin-top:6px;color:var(--muted)">Hosted on GitHub Pages • Domain: www.vastama.com</div>
-		</footer>
-	</div>
+      <div class="pstage">
+        <div class="pstage-top">
+          <div class="module-id">04 · monitor</div>
+          <h3>Monitor</h3>
+        </div>
+        <p>Ongoing visibility into uptime, performance, and search presence — plus AI-driven monitoring that flags drift before users notice it.</p>
+        <ul>
+          <li>Uptime, core web vitals, crawlability checks</li>
+          <li>AI-driven anomaly detection and analytics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label">Engagement terms</div>
+      <h2>No retainer mystery</h2>
+      <p>Most consultancies sell time. Vastama scopes outcomes first, then figures out what time that takes — for one pipeline stage or all four.</p>
+    </div>
+    <div class="approach-list">
+      <div class="approach-item">
+        <div class="num">scope</div>
+        <h4>Audit before estimate</h4>
+        <p>A short technical look at what exists today, before any number gets attached to the work.</p>
+      </div>
+      <div class="approach-item">
+        <div class="num">deliver</div>
+        <h4>Ship in reviewable units</h4>
+        <p>Work lands as PRs, staged builds, and short reports — not a black box that surfaces once a month.</p>
+      </div>
+      <div class="approach-item">
+        <div class="num">stay or hand off</div>
+        <h4>Your call, not ours</h4>
+        <p>Move to ongoing monitoring after launch, or take the documentation and run it yourselves.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <div>
+        <h2>Tell us what's breaking, or what you're trying to ship.</h2>
+        <p>One short call to figure out scope — no pitch deck required.</p>
+      </div>
+      <div class="contact-meta">
+        <a href="mailto:contact@vastama.com">contact@vastama.com</a>
+        <span>Vastama Ltd · Israel</span>
+        <span>Company no. 515052702</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Vastama Ltd</span>
+    <span>Remote engagements worldwide</span>
+  </div>
+</footer>
+
+<script>
+const lines = [
+  {status:'DESIGN', target:'wireframes → component library', ms:'done', delay:0, cls:'info'},
+  {status:'BUILD', target:'frontend deployed → staging.app', ms:'2m 14s', delay:650, cls:'info'},
+  {status:'RUN', target:'auth.spec.ts', ms:'', delay:1400},
+  {status:'PASS', target:'auth.spec.ts › login flow', ms:'214ms', delay:1950, cls:'pass'},
+  {status:'PASS', target:'checkout.spec.ts › payment webhook', ms:'502ms', delay:2500, cls:'pass'},
+  {status:'WATCH', target:'monitoring: uptime 99.98% · 30d', ms:'', delay:3150, cls:'info'},
+  {status:'WATCH', target:'lighthouse: performance 96/100', ms:'', delay:3700, cls:'info'},
+  {status:'DONE', target:'cycle complete · next check in 24h', ms:'', delay:4250, cls:'pass'},
+];
+
+const term = document.getElementById('term');
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function renderLine(l){
+  const div = document.createElement('div');
+  div.className = 'tline';
+  if(!reduced) div.style.animationDelay = '0.05s';
+  div.innerHTML = `<span class="status ${l.cls||'run'}">${l.status}</span><span class="target">${l.target}</span>${l.ms ? `<span class="ms">${l.ms}</span>` : ''}`;
+  return div;
+}
+
+if(reduced){
+  lines.forEach(l => term.appendChild(renderLine(l)));
+} else {
+  lines.forEach(l => {
+    setTimeout(() => term.appendChild(renderLine(l)), l.delay);
+  });
+  setTimeout(() => {
+    const c = document.createElement('span');
+    c.className = 'cursor';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'tline';
+    wrapper.style.opacity = '1';
+    wrapper.appendChild(c);
+    term.appendChild(wrapper);
+  }, 4600);
+}
+</script>
+
 </body>
 </html>
